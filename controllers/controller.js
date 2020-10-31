@@ -5,6 +5,7 @@ exports.getImage = (req, res) => {
 }
 
 exports.addImage = (req, res) => {
+    console.log(req.file)
     if (req.file == undefined)
         res.send("Error")
     else

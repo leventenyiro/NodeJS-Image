@@ -2,13 +2,17 @@ class FileUpload {
     constructor() {
         const multer = require("multer")
         const path = require("path")
+        const fs = require("fs")
 
         const storage = multer.diskStorage({
             destination: (req, file, cb) => {
                 cb(null, "images")
             },
             filename: (req, file, cb) => {
-                cb(null, file.originalname)
+                if (fs.existsSync(path.resolve("./images/" + file.originalname)))
+                    cb(null, Date.now() + "_" + file.originalname)
+                else
+                    cb(null, file.originalname)
             }
         })
 
