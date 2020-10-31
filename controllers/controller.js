@@ -18,11 +18,15 @@ exports.getImage = (req, res) => {
 exports.getImages = (req, res) => {
     const db = new Database()
     db.getImages((result) => {
-        result.forEach(e => {
-            e.file = `/${parameter.fileupload.storage}/` + e.file
-        })
-        res.send(result)
-        db.end()
+        if (result == "Error")
+            res.send("Error")
+        else {
+            result.forEach(e => {
+                e.file = `/${parameter.fileupload.storage}/` + e.file
+            })
+            res.send(result)
+            db.end()
+        }
     })
 }
 
