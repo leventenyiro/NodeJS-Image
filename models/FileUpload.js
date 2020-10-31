@@ -5,14 +5,14 @@ class FileUpload {
         const fs = require("fs")
 
         const storage = multer.diskStorage({
-            destination: (req, file, cb) => {
-                cb(null, "images")
+            destination: (req, file, callback) => {
+                callback(null, "images")
             },
-            filename: (req, file, cb) => {
+            filename: (req, file, callback) => {
                 if (fs.existsSync(path.resolve("./images/" + file.originalname)))
-                    cb(null, Date.now() + "_" + file.originalname)
+                    callback(null, Date.now() + "_" + file.originalname)
                 else
-                    cb(null, file.originalname)
+                    callback(null, file.originalname)
             }
         })
 
@@ -20,15 +20,15 @@ class FileUpload {
             limits: {
                 fileSize: 15000000
             },
-            fileFilter: (req, file, cb) => {
+            fileFilter: (req, file, callback) => {
                 const filetypes = /jpeg|jpg|png|gif/
                 const extname = filetypes.test(path.extname(file.originalname).toLowerCase())
                 const mimetype = filetypes.test(file.mimetype)
 
                 if (!mimetype && !extname)
-                    cb(null, false)
+                    callback(null, false)
                 else
-                    cb(null, true)
+                    callback(null, true)
             },
             storage: storage
         }).single("image")
