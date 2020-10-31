@@ -28,9 +28,11 @@ class Database {
         })
     }
 
-    getImage(callback) {
-        var sql = `SELECT * FROM image WHERE id = ${req.params.id}`
+    getImage(req, callback) {
+        var sql = `SELECT * FROM image WHERE id = "${req.params.id}"`
         this.conn.query(sql, (err, result) => {
+            if (err) 
+                return callback("Error")
             return callback(result[0])
         })
     }
@@ -41,11 +43,10 @@ class Database {
             "${this.hashedId}",
             "${req.file.filename}"
         )`
-        this.conn.query(sql, (err, result) => {
+        this.conn.query(sql, (err) => {
             if (err)
-                callback("Error")
-            else
-                callback("Successful")
+                return callback("Error")
+            return callback("Successful")
         })
     }
 

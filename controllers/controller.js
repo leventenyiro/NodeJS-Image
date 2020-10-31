@@ -1,8 +1,17 @@
-const path = require("path")
+const parameter = require("./parameter")
 const Database = require("../models/Database")
 
 exports.getImage = (req, res) => {
-    res.sendFile(path.resolve("./images/table.png"))
+    const db = new Database()
+    db.getImage(req, (result) => {
+        if (result == "Error")
+            res.send("Error")
+        else {
+            result.file = `/${parameter.fileupload.storage}/` + result.file
+            res.send(result)
+        }
+    })
+    //res.sendFile(path.resolve("./images/"))
 }
 
 exports.addImage = (req, res) => {

@@ -1,3 +1,5 @@
+const parameter = require("../parameter.json")
+
 class FileUpload {
     constructor() {
         const multer = require("multer")
@@ -6,10 +8,10 @@ class FileUpload {
 
         const storage = multer.diskStorage({
             destination: (req, file, callback) => {
-                callback(null, "images")
+                callback(null, parameter.fileupload.storage)
             },
             filename: (req, file, callback) => {
-                if (fs.existsSync(path.resolve("./images/" + file.originalname)))
+                if (fs.existsSync(path.resolve(`./${parameter.fileupload.storage}/` + file.originalname)))
                     callback(null, Date.now() + "_" + file.originalname)
                 else
                     callback(null, file.originalname)
