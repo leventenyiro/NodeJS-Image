@@ -25,7 +25,7 @@ class Database {
         var sql = "SELECT * FROM image"
         this.conn.query(sql, (err, result) => {
             if (err)
-                return callback("Error")
+                return callback({ error: "Error" })
             return callback(result)
         })
     }
@@ -34,7 +34,7 @@ class Database {
         var sql = `SELECT * FROM image WHERE id = "${req.params.id}"`
         this.conn.query(sql, (err, result) => {
             if (err) 
-                return callback("Error")
+                return callback({ error: "Error" })
             return callback(result[0])
         })
     }
@@ -48,8 +48,8 @@ class Database {
         )`
         this.conn.query(sql, (err) => {
             if (err)
-                return callback("Error")
-            return callback("Successful")
+                return callback({ error: "Error" })
+            return callback({ message: "Successful" })
         })
     }
 
@@ -57,8 +57,8 @@ class Database {
         var sql = `DELETE FROM image WHERE id = "${req.params.id}"`
         this.conn.query(sql, (err) => {
             if (err)
-                return callback("Error")
-            return callback("Successful")
+                return callback({ error: "Error" })
+            return callback({ message: "Successful" })
         })
     }
 
