@@ -41,8 +41,9 @@ class Database {
 
     addImage(req, callback) {
         this.generateNewHashedId("image")
-        var sql = `INSERT INTO image (id, file) VALUES (
+        var sql = `INSERT INTO image (id, name, file) VALUES (
             "${this.hashedId}",
+            "${req.body.name}",
             "${req.file.filename}"
         )`
         this.conn.query(sql, (err) => {
