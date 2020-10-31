@@ -5,6 +5,8 @@ const FileUpload = require("./models/FileUpload")
 
 router.get("/:id", controller.getImage)
 
+router.get("/", controller.getImages)
+
 router.post("/", new FileUpload().upload, controller.addImage)
 
 module.exports = router

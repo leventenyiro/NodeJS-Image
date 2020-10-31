@@ -24,6 +24,8 @@ class Database {
     getImages(callback) {
         var sql = "SELECT * FROM image"
         this.conn.query(sql, (err, result) => {
+            if (err)
+                return callback("Error")
             return callback(result)
         })
     }
