@@ -1,4 +1,6 @@
 const parameter = require("../parameter.json")
+const fs = require("fs")
+const path = require("path")
 const Database = require("../models/Database")
 
 exports.getImage = (req, res) => {
@@ -41,4 +43,19 @@ exports.addImage = (req, res) => {
             db.end()
         })
     }
+}
+
+exports.deleteImage = (req, res) => {
+    const db = new Database()
+    db.getImage(req, (result) => {
+        if (result == "Error")
+            res.send("Error")
+        else {
+            fs.unlinkSync(path.resolve(`./${parameter.fileupload.storage}/${result.file}`))
+            db.deleteImage(req, (result) => {
+                res.send(result)
+                db.end()
+            })
+        }
+    })
 }

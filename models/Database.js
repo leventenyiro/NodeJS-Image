@@ -52,6 +52,15 @@ class Database {
         })
     }
 
+    deleteImage(req, callback) {
+        var sql = `DELETE FROM image WHERE id = "${req.params.id}"`
+        this.conn.query(sql, (err) => {
+            if (err)
+                return callback("Error")
+            return callback("Successful")
+        })
+    }
+
     end() {
         this.conn.end()
     }

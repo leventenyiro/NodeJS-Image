@@ -9,4 +9,6 @@ router.get("/", controller.getImages)
 
 router.post("/", new FileUpload().upload, controller.addImage)
 
+router.delete("/:id", controller.deleteImage)
+
 module.exports = router
