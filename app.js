@@ -32,17 +32,20 @@ const upload = multer({
     storage: storage
 })
 
-//const upload = multer({ storage: storage })
-
-
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+//app.use("/images", express.static("images"))
 
 app.post("/", upload.single("image"), (req, res) => {
+    console.log(req.file)
     if (req.file == undefined)
         res.send("Error")
     else
         res.send("Successful")
+})
+
+app.get("/", (req, res) => {
+    res.sendFile(__dirname + "/images/table.png")
 })
 
 app.listen(8080, () => {
