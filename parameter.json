@@ -1,0 +1,15 @@
+{
+    "app": {
+        "port": 8080
+    },
+    "db": {
+        "host": "localhost",
+        "user": "root",
+        "password": "",
+        "database": "restapi",
+        "cryptSize": 3
+    },
+    "fileupload": {
+        "storage": "storage"
+    }
+}
