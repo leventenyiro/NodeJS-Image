@@ -25,7 +25,6 @@ exports.getImages = (req, res) => {
         result.forEach(e => {
             e.file = `/${parameter.fileupload.storage}/` + e.file
         })
-        console.log(result)
         res.json(result)
         db.end()
     })

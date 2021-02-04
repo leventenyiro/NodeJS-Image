@@ -10,5 +10,5 @@ app.use(`/${parameter.fileupload.storage}`, express.static(parameter.fileupload.
 app.use("/", router)
 
 app.listen(parameter.app.port, () => {
-    console.log("Running...")
+    console.log(`Running on port ${parameter.app.port}...`)
 })
