@@ -1,2 +1,3 @@
 - [x] add req.body.name
 - [x] modify response jsons
+- [ ] modify errors

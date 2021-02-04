@@ -6,7 +6,7 @@
         "host": "localhost",
         "user": "root",
         "password": "",
-        "database": "restapi",
+        "database": "image",
         "cryptSize": 3
     },
     "fileupload": {

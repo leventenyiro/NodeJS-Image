@@ -8,9 +8,11 @@ exports.getImage = (req, res) => {
     db.getImage(req, (result) => {
         if ("error" in result)
             res.send("Error")
+        else if (result == undefined)
+            res.end()
         else {
             result.file = `/${parameter.fileupload.storage}/` + result.file
-            res.send(result)
+            res.json(result)
         }
         db.end()
     })
@@ -20,18 +22,16 @@ exports.getImage = (req, res) => {
 exports.getImages = (req, res) => {
     const db = new Database()
     db.getImages((result) => {
-        if (!"error" in result) {
-            result.forEach(e => {
-                e.file = `/${parameter.fileupload.storage}/` + e.file
-            })
-        }
-        res.send(result)
+        result.forEach(e => {
+            e.file = `/${parameter.fileupload.storage}/` + e.file
+        })
+        console.log(result)
+        res.json(result)
         db.end()
     })
 }
 
 exports.addImage = (req, res) => {
-    //console.log(req.file)
     if (req.file == undefined)
         res.send("Error")
     else {
